@@ -5,6 +5,8 @@ import configureStore from './store/configureStore';
 import reducer from './reducers';
 import { loadState, saveState } from './store/localStorage.js';
 
+import Home from './pages/Home';
+
 // Load State from localStorage
 const persistedState = loadState();
 const store = createStore(reducer, persistedState, configureStore);
@@ -12,12 +14,16 @@ const store = createStore(reducer, persistedState, configureStore);
 // Add state to localStorage
 store.subscribe(() => {
   saveState({
-    hotSpot: store.getState().hotSpot,
+    characters: store.getState().characters,
   });
 });
 
 function App() {
-  return <Provider store={store}>oi</Provider>;
+  return (
+    <Provider store={store}>
+      <Home />
+    </Provider>
+  );
 }
 
 export default App;

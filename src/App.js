@@ -1,23 +1,23 @@
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import configureStore from './store/configureStore';
+import reducer from './reducers';
+import { loadState, saveState } from './store/localStorage.js';
+
+// Load State from localStorage
+const persistedState = loadState();
+const store = createStore(reducer, persistedState, configureStore);
+
+// Add state to localStorage
+store.subscribe(() => {
+  saveState({
+    hotSpot: store.getState().hotSpot,
+  });
+});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <Provider store={store}>oi</Provider>;
 }
 
 export default App;

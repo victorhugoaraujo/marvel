@@ -1,11 +1,11 @@
 import React from 'react';
 import { createStore } from 'redux';
+import Routes from './routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import reducer from './reducers';
 import { loadState, saveState } from './store/localStorage.js';
-
-import Home from './pages/Home';
 
 // Load State from localStorage
 const persistedState = loadState();
@@ -20,9 +20,11 @@ store.subscribe(() => {
 
 function App() {
   return (
-    <Provider store={store}>
-      <Home />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <Routes />
+      </Provider>
+    </Router>
   );
 }
 

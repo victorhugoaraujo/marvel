@@ -19,7 +19,7 @@ export default function characters(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        characters: action.response.data.data.results,
+        characters: [...action.response.data.data.results],
       };
     default:
       return state;

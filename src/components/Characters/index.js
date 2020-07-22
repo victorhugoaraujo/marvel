@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Characters = () => {
   const dispatch = useDispatch();
-  const characters = useSelector(
-    (state) => state.characters.searchCharacters || state.characters.characters
-  );
+  const characters = useSelector((state) => state.characters.loadedCharacters);
   const loading = useSelector((state) => state.characters.loading);
 
   useEffect(() => {

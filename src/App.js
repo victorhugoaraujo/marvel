@@ -14,7 +14,7 @@ const store = createStore(reducer, persistedState, configureStore);
 // Add state to localStorage
 store.subscribe(() => {
   saveState({
-    characters: store.getState().characters,
+    characters: store.getState().characters.characters,
   });
 });
 

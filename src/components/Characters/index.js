@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCharacters } from '../../actions/characters';
+import { Link } from 'react-router-dom';
 
 const Characters = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ const Characters = () => {
       {!loading &&
         characters.map((character) => (
           <li key={character.id}>
-            <p>{character.name}</p>
-            <img
-              src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              alt={`Marvel hero ${character.name}`}
-            />
+            <Link to={`/details/${character.id}`}>
+              <p>{character.name}</p>
+              <img
+                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                alt={`Marvel hero ${character.name}`}
+              />
+            </Link>
           </li>
         ))}
     </ul>

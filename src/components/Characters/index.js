@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadCharacters } from '../../actions/characters';
 import { Link } from 'react-router-dom';
 
+import { CharacterList, CharacterItem, CharacterName } from './styles';
+
 const Characters = () => {
   const dispatch = useDispatch();
   const characters = useSelector((state) => state.characters.loadedCharacters);
@@ -13,23 +15,24 @@ const Characters = () => {
   }, [dispatch]);
 
   return (
-    <ul>
+    <CharacterList>
       {!loading &&
         characters.map((character) => (
-          <li key={character.id}>
+          <CharacterItem
+            background={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+            key={character.id}
+          >
             <Link
               data-testid="character-image"
               to={`/character/${character.id}`}
             >
-              <p data-testid="character-name">{character.name}</p>
-              <img
-                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                alt={`Marvel hero ${character.name}`}
-              />
+              <CharacterName data-testid="character-name">
+                {character.name}
+              </CharacterName>
             </Link>
-          </li>
+          </CharacterItem>
         ))}
-    </ul>
+    </CharacterList>
   );
 };
 

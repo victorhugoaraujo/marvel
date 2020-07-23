@@ -7,6 +7,8 @@ import configureStore from './store/configureStore';
 import reducer from './reducers';
 import { loadState, saveState } from './store/localStorage.js';
 
+import GlobalStyle from './styles/global';
+
 // Load State from localStorage
 const persistedState = loadState();
 const store = createStore(reducer, persistedState, configureStore);
@@ -24,6 +26,7 @@ function App() {
       <Provider store={store}>
         <Routes />
       </Provider>
+      <GlobalStyle />
     </Router>
   );
 }

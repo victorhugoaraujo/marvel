@@ -22,6 +22,7 @@ const CharacterDetails = () => {
       {character.map((info) => (
         <div key={info.id}>
           <p>{info.name}</p>
+          <p>{info.description}</p>
           <img
             src={`${info.thumbnail.path}.${info.thumbnail.extension}`}
             alt={`Marvel hero ${info.name}`}

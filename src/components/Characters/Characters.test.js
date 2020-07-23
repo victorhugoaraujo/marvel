@@ -262,7 +262,7 @@ describe('render Characters component', () => {
   });
 
   it('should render a characters name', () => {
-    const { debug, getByText } = renderWithProviders(<Characters />, {
+    const { getByText } = renderWithProviders(<Characters />, {
       reduxState: {
         characters: {
           loading: false,
@@ -284,7 +284,5 @@ describe('render Characters component', () => {
     });
     const element = getByText(/3-D Man/i);
     expect(element).toBeInTheDocument();
-
-    debug();
   });
 });

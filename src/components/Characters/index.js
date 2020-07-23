@@ -17,8 +17,8 @@ const Characters = () => {
       {!loading &&
         characters.map((character) => (
           <li key={character.id}>
-            <Link to={`/details/${character.id}`}>
-              <p>{character.name}</p>
+            <Link data-testid="character-image" to={`/details/${character.id}`}>
+              <p data-testid="character-name">{character.name}</p>
               <img
                 src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
                 alt={`Marvel hero ${character.name}`}

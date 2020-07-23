@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from '../SearchBar';
 
-export const Header = () => {
+const Header = () => {
   return (
     <>
       <h1>MARVEL</h1>
@@ -9,3 +9,4 @@ export const Header = () => {
     </>
   );
 };
+export default Header;

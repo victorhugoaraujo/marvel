@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import characters from './characters';
+import { characters } from './characters';
 
 const allReducers = combineReducers({
   characters,

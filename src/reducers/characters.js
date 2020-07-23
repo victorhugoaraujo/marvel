@@ -7,14 +7,14 @@ import {
   SEARCH_CHARACTER_SUCCESS,
 } from '../actions/characters';
 
-const initialState = {
+export const initialState = {
   loading: false,
   loadingSeries: false,
   loadedCharacters: [],
   series: [],
 };
 
-export default function characters(state = initialState, action) {
+export function characters(state = initialState, action) {
   switch (action.type) {
     case LOAD_CHARACTERS:
       return {

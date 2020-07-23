@@ -1,28 +1,74 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCharacters, loadCharacterSeries } from '../../actions/characters';
 
 const CharacterDetails = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
+  const { id } = useParams();
+  const formRef = useRef();
 
-  const character = useSelector((state) => state.characters.loadedCharacters);
+  const characters = useSelector((state) => state.characters.loadedCharacters);
   const series = useSelector((state) => state.characters.series);
   const loadingSeries = useSelector((state) => state.characters.loadingSeries);
+  const characterDetails = characters.filter(
+    (character) => character.id === parseInt(id)
+  );
+
+  const [charatersStored, setCharatersStored] = useState(
+    JSON.parse(localStorage.getItem('@Marvel:character'))
+  );
+  const findCurrentCharacterAtLocalStore =
+    charatersStored && charatersStored.find((item) => item.id === parseInt(id));
+  const { realName, description } =
+    !!findCurrentCharacterAtLocalStore && findCurrentCharacterAtLocalStore;
 
   useEffect(() => {
-    dispatch(loadCharacters(id));
+    if (characters.length <= 0) {
+      dispatch(loadCharacters(id));
+    }
     dispatch(loadCharacterSeries(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, characters]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const realName = formRef.current.realName.value;
+    const description = formRef.current.description.value;
+    let character = charatersStored || [];
+    let editedInfo = {
+      id: parseInt(id),
+      realName,
+      description,
+    };
+    if (findCurrentCharacterAtLocalStore) {
+      for (var i in character) {
+        if (character[i].id === parseInt(id)) {
+          character[i] = editedInfo;
+          break;
+        }
+      }
+    } else {
+      character = [...character, editedInfo];
+    }
+    localStorage.setItem('@Marvel:character', JSON.stringify(character));
+    setCharatersStored(character);
+  };
 
   return (
     <>
       <h1>Details</h1>
-      {character.map((info) => (
+      <form ref={formRef} onSubmit={handleSubmit}>
+        <label>Real Name</label>
+        <input name="realName" type="text" />
+        <label>Description</label>
+        <input name="description" type="text" />
+        <button type="submit">Salvar</button>
+      </form>
+      {characterDetails.map((info) => (
         <div key={info.id}>
           <p>{info.name}</p>
-          <p>{info.description}</p>
+          <p>{realName}</p>
+          <p>{description || info.description}</p>
           <img
             src={`${info.thumbnail.path}.${info.thumbnail.extension}`}
             alt={`Marvel hero ${info.name}`}

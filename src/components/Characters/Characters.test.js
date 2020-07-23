@@ -258,7 +258,7 @@ describe('render Characters component', () => {
       },
     });
     const linkElement = getByTestId('character-image').getAttribute('href');
-    expect(linkElement).toBe('/details/1011334');
+    expect(linkElement).toBe('/character/1011334');
   });
 
   it('should render a characters name', () => {

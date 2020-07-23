@@ -7,7 +7,7 @@ import Home from '../pages/Home';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/details/:id" component={Details} />
+    <Route path="/character/:id" component={Details} />
   </Switch>
 );
 

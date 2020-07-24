@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background: #000;
+  height: calc(100vh - 104px);
+  /* place-content: center; */
+  justify-content: space-between;
 
   & h1,
   h2,
@@ -15,6 +17,7 @@ export const Container = styled.div`
 export const Character = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 2;
   justify-content: flex-end;
   height: 595px;
   background: ${(props) =>
@@ -34,23 +37,24 @@ export const RealName = styled.h2`
 
 export const Description = styled.p`
   font-size: 14px;
+  max-width: 800px;
   margin-top: 40px;
 `;
 
 export const SeriesContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 `;
 export const SeriesList = styled.ul`
   display: flex;
+  flex: 1;
   overflow: auto;
   margin-top: 10px;
 
   &::-webkit-scrollbar {
     height: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
   }
 
   &::-webkit-scrollbar-thumb {
@@ -61,8 +65,8 @@ export const SeriesList = styled.ul`
 
 export const SeriesListItem = styled.li`
   flex: 0 0 auto;
-  height: 150px;
-  width: 100px;
+  height: 175px;
+  width: 125px;
   margin: 10px;
   background: ${(props) => `url(${props.backgroundSeries}) no-repeat center`};
   background-size: cover;

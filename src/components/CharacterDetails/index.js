@@ -19,12 +19,14 @@ const CharacterDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const formRef = useRef();
-  const regExp = /\(([^)]+)\)/;
+  const regExp = /\(([^)]+)\)/; // get the item between parens ()
 
   const characters = useSelector((state) => state.characters.loadedCharacters);
   const loading = useSelector((state) => state.characters.loading);
   const series = useSelector((state) => state.characters.series);
   const loadingSeries = useSelector((state) => state.characters.loadingSeries);
+
+  console.log(loadingSeries);
   const characterDetails = characters.filter(
     (character) => character.id === parseInt(id)
   );
@@ -70,18 +72,18 @@ const CharacterDetails = () => {
 
   return (
     <Container>
-      <form ref={formRef} onSubmit={handleSubmit}>
-        <label>Real Name</label>
-        <input name="realName" type="text" />
-        <label>Description</label>
-        <input name="description" type="text" />
-        <button type="submit">Salvar</button>
-      </form>
-
       {!loading ? (
-        characterDetails.map((info) => (
-          <div key={info.id}>
+        <>
+          {/* <form ref={formRef} onSubmit={handleSubmit}>
+            <label>Real Name</label>
+            <input name="realName" type="text" />
+            <label>Description</label>
+            <input name="description" type="text" />
+            <button type="submit">Salvar</button>
+          </form> */}
+          {characterDetails.map((info) => (
             <Character
+              key={info.id}
               background={`${info.thumbnail.path}.${info.thumbnail.extension}`}
             >
               <RealName>{realName || info.name.split(regExp)[1]}</RealName>
@@ -90,28 +92,28 @@ const CharacterDetails = () => {
               </CharacterName>
               <Description>{description || info.description}</Description>
             </Character>
+          ))}
 
-            {!loadingSeries ? (
-              <SeriesContainer>
-                <p>Series</p>
-                {series.length > 0 ? (
-                  <SeriesList>
-                    {series.map((serie) => (
-                      <SeriesListItem
-                        backgroundSeries={`${serie.thumbnail.path}.${serie.thumbnail.extension}`}
-                        key={serie.id}
-                      ></SeriesListItem>
-                    ))}
-                  </SeriesList>
-                ) : (
-                  <p>Nenhuma Serie encontrada</p>
-                )}
-              </SeriesContainer>
-            ) : (
-              <Loading />
-            )}
-          </div>
-        ))
+          {!loadingSeries ? (
+            <SeriesContainer>
+              <p>Series</p>
+              {series.length > 0 ? (
+                <SeriesList>
+                  {series.map((serie) => (
+                    <SeriesListItem
+                      backgroundSeries={`${serie.thumbnail.path}.${serie.thumbnail.extension}`}
+                      key={serie.id}
+                    ></SeriesListItem>
+                  ))}
+                </SeriesList>
+              ) : (
+                <p>Nāo foi localizado nenhuma série!</p>
+              )}
+            </SeriesContainer>
+          ) : (
+            <Loading />
+          )}
+        </>
       ) : (
         <Loading />
       )}

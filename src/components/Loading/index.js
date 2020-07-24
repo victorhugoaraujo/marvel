@@ -1,12 +1,13 @@
 import React from 'react';
 
-import loading from '../../assets/loading.svg';
+import { Container } from './styles';
+import { AiOutlineLoading } from 'react-icons/ai';
 
 const Loading = () => {
   return (
-    <>
-      <img src={loading} alt="React Logo" />
-    </>
+    <Container>
+      <AiOutlineLoading className="ai-spin" />
+    </Container>
   );
 };
 

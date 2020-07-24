@@ -8,8 +8,11 @@ export const Container = styled.div`
 
 export const Logo = styled.svg`
   width: 375px;
-  height: 64px;
+  height: 32px;
   & path {
     fill: #ed1d24;
+  }
+  @media (min-width: 800px) {
+    height: 64px;
   }
 `;

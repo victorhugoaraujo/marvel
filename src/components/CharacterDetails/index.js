@@ -2,13 +2,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCharacters, loadCharacterSeries } from '../../actions/characters';
+import Loading from '../Loading';
+
+import {
+  Container,
+  Character,
+  CharacterName,
+  Description,
+  RealName,
+  SeriesContainer,
+  SeriesList,
+  SeriesListItem,
+} from './styles';
 
 const CharacterDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const formRef = useRef();
+  const regExp = /\(([^)]+)\)/;
 
   const characters = useSelector((state) => state.characters.loadedCharacters);
+  const loading = useSelector((state) => state.characters.loading);
   const series = useSelector((state) => state.characters.series);
   const loadingSeries = useSelector((state) => state.characters.loadingSeries);
   const characterDetails = characters.filter(
@@ -55,8 +69,7 @@ const CharacterDetails = () => {
   };
 
   return (
-    <>
-      <h1>Details</h1>
+    <Container>
       <form ref={formRef} onSubmit={handleSubmit}>
         <label>Real Name</label>
         <input name="realName" type="text" />
@@ -64,31 +77,45 @@ const CharacterDetails = () => {
         <input name="description" type="text" />
         <button type="submit">Salvar</button>
       </form>
-      {characterDetails.map((info) => (
-        <div key={info.id}>
-          <p>{info.name}</p>
-          <p>{realName}</p>
-          <p>{description || info.description}</p>
-          <img
-            src={`${info.thumbnail.path}.${info.thumbnail.extension}`}
-            alt={`Marvel hero ${info.name}`}
-          />
-          {!loadingSeries && (
-            <ul>
-              {series.map((serie) => (
-                <li key={serie.title}>
-                  {serie.title}
-                  <img
-                    src={`${serie.thumbnail.path}.${serie.thumbnail.extension}`}
-                    alt={`Marvel serie ${info.title}`}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
-    </>
+
+      {!loading ? (
+        characterDetails.map((info) => (
+          <div key={info.id}>
+            <Character
+              background={`${info.thumbnail.path}.${info.thumbnail.extension}`}
+            >
+              <RealName>{realName || info.name.split(regExp)[1]}</RealName>
+              <CharacterName>
+                {info.name.split(regExp)[0] || info.name}
+              </CharacterName>
+              <Description>{description || info.description}</Description>
+            </Character>
+
+            {!loadingSeries ? (
+              <SeriesContainer>
+                <p>Series</p>
+                {series.length > 0 ? (
+                  <SeriesList>
+                    {series.map((serie) => (
+                      <SeriesListItem
+                        backgroundSeries={`${serie.thumbnail.path}.${serie.thumbnail.extension}`}
+                        key={serie.id}
+                      ></SeriesListItem>
+                    ))}
+                  </SeriesList>
+                ) : (
+                  <p>Nenhuma Serie encontrada</p>
+                )}
+              </SeriesContainer>
+            ) : (
+              <Loading />
+            )}
+          </div>
+        ))
+      ) : (
+        <Loading />
+      )}
+    </Container>
   );
 };
 

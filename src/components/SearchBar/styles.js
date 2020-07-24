@@ -8,14 +8,14 @@ export const Container = styled.div`
 export const SearchIcon = styled.i`
   position: absolute;
   color: #747474;
-  left: 20px;
+  left: 30px;
 `;
 
 export const SearchInput = styled.input`
   flex: 1;
   border: 1px solid #e8e7e7;
-  padding: 10px 10px 10px 50px;
-  margin-right: 20px;
+  padding: 10px 10px 10px 40px;
+  margin: 0 20px;
   border-radius: 50px;
   background-color: #f8f8f8;
 `;

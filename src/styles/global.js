@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #FFF;
+    background: #000;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -24,6 +24,7 @@ export default createGlobalStyle`
     font-size: 32px;
     color: #313140;
   }
+
   a {
     text-decoration: none;
   }

@@ -81,32 +81,32 @@ const SearchBar = () => {
           </ClearQuery>
         )}
       </SearchContainer>
-      {/* {query && inputFocus && ( */}
-      <SearchResultList>
-        {loadingSearch ? (
-          <Loading />
-        ) : (
-          characters.map((character) => (
-            <li key={character.id}>
-              <img
-                alt={`Marvel character named ${character.name}`}
-                src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-              />
-              <DescriptionContainer>
-                <Link
-                  data-testid="character-image"
-                  onClick={() => handleAddCharacterToList(character)}
-                  to={`/character/${character.id}`}
-                >
-                  <CharacterTitle>{character.name}</CharacterTitle>
-                  <span>{character.description}</span>
-                </Link>
-              </DescriptionContainer>
-            </li>
-          ))
-        )}
-      </SearchResultList>
-      {/* )} */}
+      {query && inputFocus && (
+        <SearchResultList>
+          {loadingSearch ? (
+            <Loading />
+          ) : (
+            characters.map((character) => (
+              <li key={character.id}>
+                <img
+                  alt={`Marvel character named ${character.name}`}
+                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                />
+                <DescriptionContainer>
+                  <Link
+                    data-testid="character-image"
+                    onClick={() => handleAddCharacterToList(character)}
+                    to={`/character/${character.id}`}
+                  >
+                    <CharacterTitle>{character.name}</CharacterTitle>
+                    <span>{character.description}</span>
+                  </Link>
+                </DescriptionContainer>
+              </li>
+            ))
+          )}
+        </SearchResultList>
+      )}
     </Container>
   );
 };

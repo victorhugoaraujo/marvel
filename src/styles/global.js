@@ -10,6 +10,7 @@ export default createGlobalStyle`
 
   body {
     background: #000;
+    color: #fff;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -27,6 +28,11 @@ export default createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: #fff;
+  }
+
+  li{
+    list-style:none;
   }
 
   button {

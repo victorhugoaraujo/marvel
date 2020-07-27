@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 104px);
-  /* place-content: center; */
   justify-content: space-between;
 
   & h1,
@@ -26,15 +25,6 @@ export const Character = styled.div`
   padding: 20px;
 `;
 
-export const CharacterName = styled.h1`
-  font-size: 40px;
-`;
-
-export const RealName = styled.h2`
-  font-size: 16px;
-  font-weight: 300;
-`;
-
 export const Description = styled.p`
   font-size: 14px;
   max-width: 800px;
@@ -49,7 +39,6 @@ export const SeriesContainer = styled.div`
 `;
 export const SeriesList = styled.ul`
   display: flex;
-  flex: 1;
   overflow: auto;
   margin-top: 10px;
 

@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+`;
+
 export const CharacterList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 20px;
+  padding: 0 10px;
 `;
 
 export const CharacterItem = styled.li`
@@ -24,16 +32,5 @@ export const CharacterItem = styled.li`
   @media (min-width: 800px) {
     max-width: 700px;
     max-height: 500px;
-  }
-`;
-
-export const CharacterName = styled.h1`
-  font-size: 20px;
-  color: #fff;
-
-  &:hover {
-    font-size: 22px;
-    transition: 0.2s;
-    transition-timing-function: ease-in-out;
   }
 `;

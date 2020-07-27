@@ -9,6 +9,9 @@ export const LOAD_CHARACTER_SERIES_SUCCESS = 'LOAD_CHARACTER_SERIES_SUCCESS';
 export const SEARCH_CHARACTER = 'SEARCH_CHARACTER';
 export const SEARCH_CHARACTER_SUCCESS = 'SEARCH_CHARACTER_SUCCESS';
 
+export const CLEAR_SEARCH_CARACTER = 'CLEAR_SEARCH_CARACTER';
+export const ADD_CHARACTER_TO_LIST = 'ADD_CHARACTER_TO_LIST';
+
 export const loadCharacters = (id, name) => {
   return (dispatch) => {
     dispatch({ type: LOAD_CHARACTERS });
@@ -71,3 +74,19 @@ export const searchCharactersByName = (name) => {
       });
   };
 };
+export const clearSearchCharacter = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_SEARCH_CARACTER });
+  };
+};
+
+export const addCharacterToList = (obj) => {
+  return (dispatch) => {
+    dispatch({ type: ADD_CHARACTER_TO_LIST, obj });
+  };
+};
+
+// export const addCharacterToList = (obj) => ({
+//   type: ADD_CHARACTER_TO_LIST,
+//   obj,
+// });

@@ -3,30 +3,31 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { loadCharacters, loadCharacterSeries } from '../../actions/characters';
 import Loading from '../Loading';
+import { splitName } from '../../utils/splitName';
 
 import {
   Container,
   Character,
-  CharacterName,
   Description,
-  RealName,
   SeriesContainer,
   SeriesList,
   SeriesListItem,
 } from './styles';
 
+import CharacterTitle from '../CharacterDetails/CharacterTitle';
+import CharacterSubTitle from '../CharacterDetails/CharacterSubtitle';
+
 const CharacterDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const formRef = useRef();
-  const regExp = /\(([^)]+)\)/; // get the item between parens ()
 
   const characters = useSelector((state) => state.characters.loadedCharacters);
   const loading = useSelector((state) => state.characters.loading);
   const series = useSelector((state) => state.characters.series);
   const loadingSeries = useSelector((state) => state.characters.loadingSeries);
+  const [formToggle, setFormToggle] = useState(false);
 
-  console.log(loadingSeries);
   const characterDetails = characters.filter(
     (character) => character.id === parseInt(id)
   );
@@ -40,9 +41,6 @@ const CharacterDetails = () => {
     !!findCurrentCharacterAtLocalStore && findCurrentCharacterAtLocalStore;
 
   useEffect(() => {
-    if (characters.length <= 0) {
-      dispatch(loadCharacters(id));
-    }
     dispatch(loadCharacterSeries(id));
   }, [dispatch, id, characters]);
 
@@ -74,23 +72,31 @@ const CharacterDetails = () => {
     <Container>
       {!loading ? (
         <>
-          {/* <form ref={formRef} onSubmit={handleSubmit}>
-            <label>Real Name</label>
-            <input name="realName" type="text" />
-            <label>Description</label>
-            <input name="description" type="text" />
-            <button type="submit">Salvar</button>
-          </form> */}
           {characterDetails.map((info) => (
             <Character
               key={info.id}
               background={`${info.thumbnail.path}.${info.thumbnail.extension}`}
             >
-              <RealName>{realName || info.name.split(regExp)[1]}</RealName>
-              <CharacterName>
-                {info.name.split(regExp)[0] || info.name}
-              </CharacterName>
+              <CharacterSubTitle>
+                {realName || splitName(info.name)[1]}
+              </CharacterSubTitle>
+              <CharacterTitle fontSize={40}>
+                {splitName(info.name)[0] || info.name}
+              </CharacterTitle>
               <Description>{description || info.description}</Description>
+              <button onClick={() => setFormToggle(!formToggle)}>
+                Edit Profile
+              </button>
+
+              {formToggle && (
+                <form ref={formRef} onSubmit={handleSubmit}>
+                  <label>Real Name</label>
+                  <input name="realName" type="text" />
+                  <label>Description</label>
+                  <input name="description" type="text" />
+                  <button type="submit">Salvar</button>
+                </form>
+              )}
             </Character>
           ))}
 

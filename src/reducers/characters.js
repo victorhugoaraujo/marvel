@@ -7,6 +7,8 @@ import {
   SEARCH_CHARACTER_SUCCESS,
   CLEAR_SEARCH_CARACTER,
   ADD_CHARACTER_TO_LIST,
+  EDIT_CHARACTER,
+  LOAD_CHARACTERS_FROM_LOCAL_STORAGE,
 } from '../actions/characters';
 
 export const initialState = {
@@ -14,6 +16,7 @@ export const initialState = {
   loadingSeries: false,
   loadedCharacters: [],
   foundCharacters: [],
+  storeCharacter: [],
   series: [],
 };
 
@@ -61,6 +64,17 @@ export function characters(state = initialState, action) {
       return {
         ...state,
         loadedCharacters: [...state.loadedCharacters, action.obj],
+      };
+    case EDIT_CHARACTER:
+      return {
+        ...state,
+        // storeCharacter: [...state.storeCharacter, action.character],
+        storeCharacter: action.character,
+      };
+    case LOAD_CHARACTERS_FROM_LOCAL_STORAGE:
+      return {
+        ...state,
+        storeCharacter: action.character,
       };
     default:
       return state;

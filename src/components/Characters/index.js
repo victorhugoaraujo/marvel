@@ -20,7 +20,7 @@ const Characters = () => {
       return;
     }
     dispatch(loadCharacters());
-  }, [dispatch]);
+  }, [dispatch, characters]);
 
   return (
     <Container>

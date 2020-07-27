@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadCharacters, loadCharacterSeries } from '../../actions/characters';
+import {
+  loadCharacters,
+  loadCharacterSeries,
+  addCharacterToLocalStorage,
+  loadCharacterFromLocalStorage,
+} from '../../actions/characters';
 import Loading from '../Loading';
 import { splitName } from '../../utils/splitName';
 
@@ -22,33 +27,39 @@ const CharacterDetails = () => {
   const { id } = useParams();
   const formRef = useRef();
 
-  const characters = useSelector((state) => state.characters.loadedCharacters);
+  const { loadedCharacters, storeCharacter } = useSelector(
+    (state) => state.characters
+  );
   const loading = useSelector((state) => state.characters.loading);
   const series = useSelector((state) => state.characters.series);
   const loadingSeries = useSelector((state) => state.characters.loadingSeries);
   const [formToggle, setFormToggle] = useState(false);
 
-  const characterDetails = characters.filter(
+  const characterDetails = loadedCharacters.filter(
     (character) => character.id === parseInt(id)
   );
 
-  const [charatersStored, setCharatersStored] = useState(
-    JSON.parse(localStorage.getItem('@Marvel:character'))
-  );
   const findCurrentCharacterAtLocalStore =
-    charatersStored && charatersStored.find((item) => item.id === parseInt(id));
+    storeCharacter && storeCharacter.find((item) => item.id === parseInt(id));
+
   const { realName, description } =
     !!findCurrentCharacterAtLocalStore && findCurrentCharacterAtLocalStore;
 
   useEffect(() => {
+    if (loadedCharacters.length <= 0) {
+      dispatch(loadCharacters(id));
+    }
     dispatch(loadCharacterSeries(id));
-  }, [dispatch, id, characters]);
+    dispatch(loadCharacterFromLocalStorage());
+  }, [dispatch, id, loadedCharacters]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const realName = formRef.current.realName.value;
-    const description = formRef.current.description.value;
-    let character = charatersStored || [];
+    const realName =
+      !!formRef.current.realName.value && formRef.current.realName.value;
+    const description =
+      !!formRef.current.description.value && formRef.current.description.value;
+    let character = storeCharacter || [];
     let editedInfo = {
       id: parseInt(id),
       realName,
@@ -64,8 +75,7 @@ const CharacterDetails = () => {
     } else {
       character = [...character, editedInfo];
     }
-    localStorage.setItem('@Marvel:character', JSON.stringify(character));
-    setCharatersStored(character);
+    dispatch(addCharacterToLocalStorage(character));
   };
 
   return (

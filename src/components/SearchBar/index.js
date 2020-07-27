@@ -40,11 +40,9 @@ const SearchBar = () => {
   }, [dispatch, query]);
 
   const handleAddCharacterToList = (character) => {
-    console.log(character.id);
     const findCharacter =
       loadedCharacters &&
       loadedCharacters.find((item) => item.id === character.id);
-    console.log(findCharacter);
 
     if (findCharacter) {
       return;

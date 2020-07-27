@@ -12,6 +12,10 @@ export const SEARCH_CHARACTER_SUCCESS = 'SEARCH_CHARACTER_SUCCESS';
 export const CLEAR_SEARCH_CARACTER = 'CLEAR_SEARCH_CARACTER';
 export const ADD_CHARACTER_TO_LIST = 'ADD_CHARACTER_TO_LIST';
 
+export const EDIT_CHARACTER = 'EDIT_CHARACTER';
+export const LOAD_CHARACTERS_FROM_LOCAL_STORAGE =
+  'LOAD_CHARACTERS_FROM_LOCAL_STORAGE';
+
 export const loadCharacters = (id, name) => {
   return (dispatch) => {
     dispatch({ type: LOAD_CHARACTERS });
@@ -86,7 +90,16 @@ export const addCharacterToList = (obj) => {
   };
 };
 
-// export const addCharacterToList = (obj) => ({
-//   type: ADD_CHARACTER_TO_LIST,
-//   obj,
-// });
+export const addCharacterToLocalStorage = (character) => {
+  localStorage.setItem('@Marvel:character', JSON.stringify(character));
+  return (dispatch) => {
+    dispatch({ type: EDIT_CHARACTER, character });
+  };
+};
+
+export const loadCharacterFromLocalStorage = () => {
+  const character = JSON.parse(localStorage.getItem('@Marvel:character'));
+  return (dispatch) => {
+    dispatch({ type: LOAD_CHARACTERS_FROM_LOCAL_STORAGE, character });
+  };
+};

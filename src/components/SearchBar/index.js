@@ -7,6 +7,8 @@ import {
   addCharacterToList,
 } from '../../actions/characters';
 import { FiSearch } from 'react-icons/fi';
+import { MdClose } from 'react-icons/md';
+
 import {
   Container,
   SearchInput,
@@ -14,14 +16,17 @@ import {
   SearchContainer,
   SearchResultList,
   DescriptionContainer,
+  ClearQuery,
 } from './styles';
 
 import CharacterTitle from '../CharacterDetails/CharacterTitle';
+import Loading from '../Loading';
 
 const SearchBar = () => {
   const [query, setQuery] = useState('');
+  const [inputFocus, setInputFocus] = useState(false);
   const characters = useSelector((state) => state.characters.foundCharacters);
-  const loading = useSelector((state) => state.characters.loading);
+  const loadingSearch = useSelector((state) => state.characters.loadingSearch);
   const loadedCharacters = useSelector(
     (state) => state.characters.loadedCharacters
   );
@@ -29,17 +34,18 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (query.length > 0) {
-        dispatch(searchCharactersByName(query));
-        return;
-      }
-      // dispatch(clearSearchCharacter());
-    }, 1000);
-    return () => clearTimeout(timer);
+    // const timer = setTimeout(() => {
+    if (query.length > 0) {
+      dispatch(searchCharactersByName(query));
+      return;
+    }
+    // }, 1000);
+    dispatch(clearSearchCharacter());
+    // return () => clearTimeout(timer);
   }, [dispatch, query]);
 
   const handleAddCharacterToList = (character) => {
+    setInputFocus(false);
     const findCharacter =
       loadedCharacters &&
       loadedCharacters.find((item) => item.id === character.id);
@@ -48,6 +54,11 @@ const SearchBar = () => {
       return;
     }
     dispatch(addCharacterToList(character));
+  };
+
+  const handleClearQuery = () => {
+    setQuery('');
+    dispatch(clearSearchCharacter());
   };
 
   return (
@@ -59,13 +70,23 @@ const SearchBar = () => {
         <SearchInput
           name="search"
           onChange={(event) => setQuery(event.target.value)}
+          onFocus={() => setInputFocus(true)}
+          value={query}
           placeholder="Buscar..."
           autoComplete="off"
         />
+        {query && (
+          <ClearQuery onClick={handleClearQuery}>
+            <MdClose />
+          </ClearQuery>
+        )}
       </SearchContainer>
-      {!loading && query.length > 0 && (
-        <SearchResultList>
-          {characters.map((character) => (
+      {/* {query && inputFocus && ( */}
+      <SearchResultList>
+        {loadingSearch ? (
+          <Loading />
+        ) : (
+          characters.map((character) => (
             <li key={character.id}>
               <img
                 alt={`Marvel character named ${character.name}`}
@@ -82,9 +103,10 @@ const SearchBar = () => {
                 </Link>
               </DescriptionContainer>
             </li>
-          ))}
-        </SearchResultList>
-      )}
+          ))
+        )}
+      </SearchResultList>
+      {/* )} */}
     </Container>
   );
 };

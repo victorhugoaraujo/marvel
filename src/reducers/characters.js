@@ -14,6 +14,7 @@ import {
 export const initialState = {
   loading: false,
   loadingSeries: false,
+  loadingSearch: false,
   loadedCharacters: [],
   foundCharacters: [],
   storeCharacter: [],
@@ -47,12 +48,12 @@ export function characters(state = initialState, action) {
     case SEARCH_CHARACTER:
       return {
         ...state,
-        loading: true,
+        loadingSearch: true,
       };
     case SEARCH_CHARACTER_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loadingSearch: false,
         foundCharacters: [...action.response.data.data.results],
       };
     case CLEAR_SEARCH_CARACTER:

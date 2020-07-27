@@ -16,11 +16,8 @@ const Characters = () => {
   const loading = useSelector((state) => state.characters.loading);
 
   useEffect(() => {
-    if (characters.length > 0) {
-      return;
-    }
     dispatch(loadCharacters());
-  }, [dispatch, characters]);
+  }, [dispatch]);
 
   return (
     <Container>
@@ -32,15 +29,13 @@ const Characters = () => {
               key={character.id}
             >
               <Link
-                data-testid="character-image"
+                data-testid="character-details-link"
                 to={`/character/${character.id}`}
               >
                 <CharacterSubTitle>
                   {splitName(character.name)[1]}
                 </CharacterSubTitle>
-                <CharacterTitle data-testid="character-name">
-                  {splitName(character.name)[0]}
-                </CharacterTitle>
+                <CharacterTitle>{splitName(character.name)[0]}</CharacterTitle>
               </Link>
             </CharacterItem>
           ))}

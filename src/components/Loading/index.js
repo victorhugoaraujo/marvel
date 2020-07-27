@@ -6,7 +6,7 @@ import { AiOutlineLoading } from 'react-icons/ai';
 const Loading = () => {
   return (
     <Container>
-      <AiOutlineLoading className="ai-spin" />
+      <AiOutlineLoading data-testid="loading" className="ai-spin" />
     </Container>
   );
 };

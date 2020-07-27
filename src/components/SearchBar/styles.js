@@ -30,7 +30,7 @@ export const SearchInput = styled.input`
 export const SearchResultList = styled.ul`
   display: flex;
   flex-direction: column;
-  height: 350px;
+  max-height: 350px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.9);
   padding: 20px;
@@ -68,4 +68,11 @@ export const DescriptionContainer = styled.div`
   & a:hover {
     text-decoration: underline;
   }
+`;
+
+export const ClearQuery = styled.button`
+  position: absolute;
+  right: 30px;
+  background: none;
+  border: none;
 `;

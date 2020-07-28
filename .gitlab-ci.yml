@@ -1,17 +1,34 @@
 stages:
   - test
   - build
+  - deploy
 unit_tests:
   image: node
   stage: test
   before_script:
-    - npm install
+    - yarn install
   script:
-    - npm test
+    - yarn test
 react_build:
   image: node
   stage: build
   before_script:
-    - npm install
+    - yarn install
   script:
-    - npm run-script build
+  - echo "Building deploy package"
+    - yarn build
+    - echo "Build successful"
+  artifacts:
+      expire_in: 1 hour
+      paths:
+        - build
+
+deploy:
+  stage: deploy
+  script:
+      - echo "Deploying to server"
+      - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+      - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+      - aws s3 rm s3://marvel-characters --recursive
+      - aws s3 sync .build/ s3://marvel-characters --acl public-read
+      - echo "Deployed"

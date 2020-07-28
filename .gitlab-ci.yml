@@ -25,6 +25,7 @@ react_build:
 
 deploy:
   stage: deploy
+  image: python:latest
   script:
       - pip install awscli
       - echo "Deploying to server"

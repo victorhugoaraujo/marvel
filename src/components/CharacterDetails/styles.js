@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 104px);
   justify-content: space-between;
 
   & h1,
@@ -18,7 +17,7 @@ export const Character = styled.div`
   flex-direction: column;
   flex: 2;
   justify-content: flex-end;
-  height: 595px;
+  min-height: calc(100vh - 410px);
   background: ${(props) =>
     `linear-gradient(rgba(255,255,255,0), rgba(0,0,0,1)), url(${props.background}) no-repeat center`};
   background-size: cover;
@@ -61,4 +60,55 @@ export const SeriesListItem = styled.li`
   background-size: cover;
   border-radius: 10px;
   box-shadow: 0px 0px 1px 0px rgba(255, 255, 255, 0.38);
+`;
+
+export const PrimaryButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 40px;
+  background: #202020;
+  border: none;
+  color: #fff;
+  border-top: 4px solid #ff0000;
+  margin: 0 20px;
+  & svg {
+    margin-right: 5px;
+  }
+`;
+
+export const EditCharacterForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  max-width: 400px;
+
+  & label {
+    margin-bottom: 10px;
+  }
+
+  & input,
+  & textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 35px;
+    border: none;
+  }
+  & textarea {
+    height: 70px;
+  }
+`;
+
+export const SaveButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 40px;
+  background: #fff;
+  border: none;
+  & svg {
+    margin-right: 5px;
+  }
 `;

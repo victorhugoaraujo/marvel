@@ -13,8 +13,7 @@ jest.mock('../SearchBar', () => {
 
 describe('render Header component', () => {
   it('should render logo component', () => {
-    const { debug, getByTestId } = render(<Header />);
-    debug();
+    const { getByTestId } = render(<Header />);
     const titleElement = getByTestId('logo');
     expect(titleElement).toBeInTheDocument();
   });

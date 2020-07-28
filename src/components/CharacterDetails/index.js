@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { RiEdit2Line } from 'react-icons/ri';
+import { AiOutlineSave } from 'react-icons/ai';
 import {
   loadCharacters,
   loadCharacterSeries,
@@ -14,6 +16,9 @@ import {
   Container,
   Character,
   Description,
+  EditCharacterForm,
+  PrimaryButton,
+  SaveButton,
   SeriesContainer,
   SeriesList,
   SeriesListItem,
@@ -46,12 +51,10 @@ const CharacterDetails = () => {
     !!findCurrentCharacterAtLocalStore && findCurrentCharacterAtLocalStore;
 
   useEffect(() => {
-    if (loadedCharacters.length <= 0) {
-      dispatch(loadCharacters(id));
-    }
+    dispatch(loadCharacters(id));
     dispatch(loadCharacterSeries(id));
     dispatch(loadCharacterFromLocalStorage());
-  }, [dispatch, id, loadedCharacters]);
+  }, [dispatch, id]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -94,21 +97,36 @@ const CharacterDetails = () => {
                 {splitName(info.name)[0] || info.name}
               </CharacterTitle>
               <Description>{description || info.description}</Description>
-              <button onClick={() => setFormToggle(!formToggle)}>
-                Edit Profile
-              </button>
-
-              {formToggle && (
-                <form ref={formRef} onSubmit={handleSubmit}>
-                  <label>Real Name</label>
-                  <input name="realName" type="text" />
-                  <label>Description</label>
-                  <input name="description" type="text" />
-                  <button type="submit">Salvar</button>
-                </form>
-              )}
             </Character>
           ))}
+
+          <PrimaryButton onClick={() => setFormToggle(!formToggle)}>
+            <RiEdit2Line />
+            Edit Profile
+          </PrimaryButton>
+
+          {formToggle && (
+            <EditCharacterForm ref={formRef} onSubmit={handleSubmit}>
+              <label>Real Name</label>
+              <input
+                name="realName"
+                type="text"
+                autoComplete="off"
+                placeholder="Ex: Peter Parker"
+              />
+              <label>Description</label>
+              <textarea
+                name="description"
+                type="text"
+                autoComplete="off"
+                placeholder="Ex: In the stories, Spider-Man is the alias of Peter Parker, "
+              />
+              <SaveButton type="submit">
+                <AiOutlineSave />
+                Salvar
+              </SaveButton>
+            </EditCharacterForm>
+          )}
 
           {!loadingSeries ? (
             <SeriesContainer>

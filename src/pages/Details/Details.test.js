@@ -23,7 +23,6 @@ jest.mock('../../components/CharacterDetails', () => {
 
 describe('render Details Page', () => {
   it('should render Details Page correctly', () => {
-    const { debug, getByTestId } = render(<Details />);
-    debug();
+    const { getByTestId } = render(<Details />);
   });
 });

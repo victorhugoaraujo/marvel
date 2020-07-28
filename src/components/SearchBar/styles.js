@@ -15,7 +15,7 @@ export const SearchContainer = styled.div`
 export const SearchIcon = styled.i`
   position: absolute;
   color: #747474;
-  left: 30px;
+  left: 35px;
 `;
 
 export const SearchInput = styled.input`
@@ -72,7 +72,8 @@ export const DescriptionContainer = styled.div`
 
 export const ClearQuery = styled.button`
   position: absolute;
-  right: 30px;
+  right: 35px;
   background: none;
   border: none;
+  height: 16px;
 `;

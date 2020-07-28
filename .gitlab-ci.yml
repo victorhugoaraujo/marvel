@@ -3,23 +3,23 @@ stages:
   - test
   - build
 eslint:
-  image: node:10.16.0
+  image: node:8.9.4
   stage: code_quality
   before_script:
-    - yarn add eslint
+    - npm install -g eslint
   script:
     - eslint -- --ext .jsx,.js src/
 unit_tests:
-  image: node:10.16.0
+  image: node:8.9.4
   stage: test
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn test
+    - npm test
 react_build:
-  image: node:10.16.0
+  image: node:8.9.4
   stage: build
   before_script:
-    - yarn install
+    - npm install
   script:
-    - yarn run build
+    - npm run-script build

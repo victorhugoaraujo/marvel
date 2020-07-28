@@ -2,7 +2,7 @@ eslint:
   image: node:10.16.0
   stage: code_quality
   before_script:
-    - yarn add -g eslint
+    - yarn add eslint
   script:
     - eslint -- --ext .jsx,.js src/
 unit_tests:

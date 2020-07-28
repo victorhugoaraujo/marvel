@@ -1,3 +1,7 @@
+stages:
+  - code_quality
+  - test
+  - build
 eslint:
   image: node:10.16.0
   stage: code_quality

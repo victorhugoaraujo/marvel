@@ -3,7 +3,7 @@ stages:
   - test
   - build
 eslint:
-  image: node:
+  image: node
   stage: code_quality
   before_script:
     - npm i eslint

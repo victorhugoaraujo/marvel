@@ -1,14 +1,6 @@
 stages:
-  - code_quality
   - test
   - build
-eslint:
-  image: node
-  stage: code_quality
-  before_script:
-    - npm i eslint
-  script:
-    - node_modules/eslint/bin/eslint.js .
 unit_tests:
   image: node
   stage: test

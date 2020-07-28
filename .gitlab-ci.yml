@@ -21,7 +21,7 @@ react_build:
   artifacts:
       expire_in: 1 hour
       paths:
-        - build
+        - build/
 
 deploy:
   stage: deploy

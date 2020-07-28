@@ -3,21 +3,21 @@ stages:
   - test
   - build
 eslint:
-  image: node:10.16.0
+  image: node:
   stage: code_quality
   before_script:
-    - npm install -g eslint
+    - npm i eslint
   script:
-    - eslint -- --ext .jsx,.js src/
+    - node_modules/eslint/bin/eslint.js .
 unit_tests:
-  image: node:10.16.0
+  image: node
   stage: test
   before_script:
     - npm install
   script:
     - npm test
 react_build:
-  image: node:10.16.0
+  image: node
   stage: build
   before_script:
     - npm install

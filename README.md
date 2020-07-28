@@ -1,68 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img alt="Marvel" src="https://res.cloudinary.com/dalyhsbj0/image/upload/v1595896004/Screen_Shot_2020-07-27_at_9.25.36_PM_jugcbh.png" />
 
-## Available Scripts
+<h3 align="center">
+  Marvel
+</h3>
 
-In the project directory, you can run:
+<p align="center">“Marvel API”!</blockquote>
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<p align="center">
+  <a href="#scroll-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#hammer-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#iphone-rodando-a-aplicação">Rodando a aplicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#computer-funcionalidades-da-aplicação">Funcionalidades da aplicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+## :scroll: Sobre o desafio
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Nesse desafio, foi criado uma aplicação para treinar os conhecimentos em ReactJS, Redux, React Hooks, Styled-Components, Axios utilizando a API da Marvel!
 
-### `yarn build`
+## :hammer: Tecnologias
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Esse projeto foi construído com as seguintes tecnologias:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+-  [ReactJS](https://reactjs.org/)
+-  [Create React App Configuration Override](https://github.com/sharegate/craco)
+-  [Redux](https://redux.js.org/)
+-  [React Router v4](https://github.com/ReactTraining/react-router)
+-  [styled-components](https://www.styled-components.com/)
+-  [React-Icons](http://react-icons.github.io/react-icons/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## :iphone: Rodando a aplicação
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+Para rodar a aplicaçāo rode os seguintes comandos:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Clone this repository
+git clone https://github.com/victorhugoaraujo/marvel.git
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Go into the repository
+$ cd marvel
 
-## Learn More
+# Install dependencies
+$ yarn install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Run the app
+$ yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### :computer: Funcionalidades da aplicação
 
-### Code Splitting
+- **`Listar os personagens`**: A tela inicial é capaz de listar os personagens retornado da API
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- **`Detalhes de um personagem`**: É possível visualizar os detalhes de um personagem, assim como as séries as quais ele faz parte
 
-### Analyzing the Bundle Size
+- **`Editar personagem`**: É possível editar algumas informações de um personagem como Nome verdadeiro e Descriçāo.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- **`Salvar informações`**: É possível salvar as informações de um personagem no LocalStorage
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- **`Buscar por personagens`**: É possível buscar por personagens através do nome
 
-### Advanced Configuration
+## :memo: Licença
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
-### Deployment
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Made with ♥ by Victor Hugo :wave: [Get in touch!](https://www.linkedin.com/in/victor-hugo-araujo-a73964115/)
